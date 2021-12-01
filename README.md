@@ -3,4 +3,4 @@
 
 Language: Java
 
-Coming soon ...
+- Day 01: Sonar Sweep
