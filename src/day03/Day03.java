@@ -21,37 +21,60 @@ public class Day03 {
         int ox = getRating(report, b, "ox");
         int co = getRating(report, b, "co");
 
-        System.out.printf("Part02\noxygen %s co2 %s\nlife support %s\n", ox, co, ox*co);
+        System.out.printf("Part02\noxygen %s co2 %s\nlife support %s\n\n", ox, co, ox*co);
+
+        int oxr = getRatingRecursive(report, b-1, "ox").get(0);
+        int cor = getRatingRecursive(report, b-1, "co").get(0);
+
+        System.out.printf("Part02 recursive\noxygen %s co2 %s\nlife support %s\n", oxr, cor, oxr*cor);
+
 
         }
 
-        public static int getRating(List<Integer> report, int bLength, String mode) {
+    public static int getRating(List<Integer> report, int bLength, String mode) {
 
-            int pos = bLength-1;
-            List<Integer> sample = report;
-            List<Integer> nextSample = new ArrayList<>();
-            while (pos >= 0) {
-                int criteria = getMostCommon(sample, pos);
-                for (int number : sample) {
-                    int bit = ((number & (int) Math.pow(2, pos)) > 0) ? 1 : 0;
-                    if ((mode.equals("ox") && criteria == bit) || (mode.equals("co") && criteria != bit) ) {
-                        nextSample.add(number);
-                    }
+        int pos = bLength-1;
+        List<Integer> sample = report;
+        List<Integer> nextSample = new ArrayList<>();
+        while (pos >= 0) {
+            int criteria = getMostCommon(sample, pos);
+            for (int number : sample) {
+                int bit = ((number & (int) Math.pow(2, pos)) > 0) ? 1 : 0;
+                if ((mode.equals("ox") && criteria == bit) || (mode.equals("co") && criteria != bit) ) {
+                    nextSample.add(number);
                 }
-
-                if (nextSample.size() == 1) {
-                    return nextSample.get(0);
-                }
-
-                sample = nextSample;
-                nextSample = new ArrayList<>();
-                pos--;
-
             }
 
-            return -1;
+            if (nextSample.size() == 1) {
+                return nextSample.get(0);
+            }
+
+            sample = nextSample;
+            nextSample = new ArrayList<>();
+            pos--;
 
         }
+
+        return -1;
+    }
+
+
+    public static List<Integer> getRatingRecursive(List<Integer> sample, int pos, String mode) {
+
+            int criteria = getMostCommon(sample, pos);
+            List<Integer> nextSample = new ArrayList<>();
+            for (int number : sample) {
+                int bit = ((number & (int) Math.pow(2, pos)) > 0) ? 1 : 0;
+                if ((mode.equals("ox") && criteria == bit) || (mode.equals("co") && criteria != bit)) {
+                    nextSample.add(number);
+                }
+            }
+            if (nextSample.size() == 1 || pos == 0) return nextSample;
+
+            return getRatingRecursive(nextSample, pos - 1, mode);
+
+    }
+
 
     public static int getMostCommon(List<Integer> sample, int pos) {
 
@@ -91,7 +114,7 @@ public class Day03 {
 
         }
 
-        System.out.printf("Part01\ngamma %s, epsilon %s\npower consumption %s \n\n",
+        System.out.printf("Part01\ngamma %s epsilon %s\npower consumption %s \n\n",
                 gamma, epsilon, gamma*epsilon);
     }
 
