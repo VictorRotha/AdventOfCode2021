@@ -23,13 +23,85 @@ public class Day05 {
 
          System.out.println("Part 01 Overlaps: " + getOverlaps(grid));
 
-         grid = getPart02Grid(lines);
+//        grid = getPart02Grid(lines);
+//        grid = getPart02Grid_2(lines);
+
+         addDiagonals(grid, lines);
 
          System.out.println("Part 02 Overlaps: " + getOverlaps(grid));
 
     }
 
 
+    public static ArrayList<Integer> getPartList(int x1, int x2) {
+
+        ArrayList<Integer> xVals = new ArrayList<>();
+
+        if (x1 < x2) {
+            for (int x = x1; x <= x2; x++) xVals.add(x);
+        } else if (x1 > x2) {
+            for (int x = x1; x >= x2; x--) xVals.add(x);
+        }
+
+        return xVals;
+    }
+
+
+    public static void addDiagonals(int[][] grid, ArrayList<Integer[]> lines) {
+
+        for (Integer[] line : lines) {
+
+            int x1 = line[0];
+            int y1 = line[1];
+            int x2 = line[2];
+            int y2 = line[3];
+
+            if (x1 == x2 || y1 == y2) continue;
+
+            ArrayList<Integer> xVals = getPartList(x1, x2);
+            ArrayList<Integer> yVals = getPartList(y1, y2);
+
+            for (int i = 0; i < xVals.size(); i++) {
+                grid[yVals.get(i)][xVals.get(i)]++;
+            }
+        }
+    }
+
+
+    public static int[][] getPart02Grid_2(ArrayList<Integer[]> lines ) {
+
+        int[][] grid = new int[maxY+1][maxX+1];
+
+        for (Integer[] line : lines) {
+
+            int x1 = line[0];
+            int y1 = line[1];
+            int x2 = line[2];
+            int y2 = line[3];
+
+            ArrayList<Integer> xVals = getPartList(x1, x2);
+            ArrayList<Integer> yVals = getPartList(y1, y2);
+
+            if (xVals.isEmpty()) {
+                for (int i = 0; i < yVals.size(); i++) {
+                    xVals.add(x1);
+                }
+            }
+
+            if (yVals.isEmpty()) {
+                for (int i = 0; i < xVals.size(); i++) {
+                    yVals.add(y1);
+                }
+            }
+
+            for (int i = 0; i < xVals.size(); i++) {
+                grid[yVals.get(i)][xVals.get(i)]++;
+            }
+
+        }
+
+        return grid;
+    }
 
 
 
@@ -70,9 +142,8 @@ public class Day05 {
 
             int y;
             if (x1 != x2 && y1 != y2 ) {
-
+                y = y1;
                 if (x1 < x2) {
-                    y = y1;
                     for (int x = x1; x <= x2; x++) {
                         grid[y][x] += 1;
                         if (y1 < y2)
@@ -81,7 +152,6 @@ public class Day05 {
                             y--;
                     }
                 } else {
-                    y = y1;
                     for (int x = x1; x >= x2; x--) {
                         grid[y][x] += 1;
                         if (y1 < y2)
