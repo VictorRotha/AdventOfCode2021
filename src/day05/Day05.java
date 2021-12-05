@@ -21,16 +21,16 @@ public class Day05 {
 
          int[][] grid = getPart01Grid(lines);
 
-         int result = 0;
+         System.out.println("Part 01 Overlaps: " + getOverlaps(grid));
 
-         for (int x = 0; x < maxX + 1; x ++) {
-              for (int y = 0; y < maxY + 1; y++ ) {
-                  if (grid[y][x] > 1) result ++;
-              }
-         }
+         grid = getPart02Grid(lines);
 
-         System.out.println("Overlap: " + result);
+         System.out.println("Part 02 Overlaps: " + getOverlaps(grid));
+
     }
+
+
+
 
 
     public static int[][] getPart01Grid(ArrayList<Integer[]> lines ) {
@@ -54,8 +54,72 @@ public class Day05 {
         }
 
         return grid;
-
     }
+
+
+    public static int[][] getPart02Grid(ArrayList<Integer[]> lines ) {
+
+        int[][] grid = new int[maxY+1][maxX+1];
+
+        for (Integer[] line : lines) {
+
+            int x1 = line[0];
+            int y1 = line[1];
+            int x2 = line[2];
+            int y2 = line[3];
+
+            int y;
+            if (x1 != x2 && y1 != y2 ) {
+
+                if (x1 < x2) {
+                    y = y1;
+                    for (int x = x1; x <= x2; x++) {
+                        grid[y][x] += 1;
+                        if (y1 < y2)
+                            y++;
+                        else
+                            y--;
+                    }
+                } else {
+                    y = y1;
+                    for (int x = x1; x >= x2; x--) {
+                        grid[y][x] += 1;
+                        if (y1 < y2)
+                            y++;
+                        else
+                            y--;
+                    }
+                }
+            } else {
+
+                x1 = Math.min(line[0], line[2]);
+                y1 = Math.min(line[1], line[3]);
+                x2 = Math.max(line[0], line[2]);
+                y2 = Math.max(line[1], line[3]);
+
+                for (int x = x1; x <= x2; x++) {
+                    for (int yy = y1; yy <= y2; yy++) {
+                        grid[yy][x] += 1;
+                    }
+                }
+            }
+
+        }
+
+        return grid;
+    }
+
+
+    public static int getOverlaps(int[][] grid) {
+        int result = 0;
+        for (int x = 0; x < maxX + 1; x ++) {
+            for (int y = 0; y < maxY + 1; y++ ) {
+                if (grid[y][x] > 1) result ++;
+            }
+        }
+        return result;
+    }
+
 
     public static void printLines(List<Integer[]> lines) {
 
@@ -78,14 +142,13 @@ public class Day05 {
 
     public static ArrayList<Integer[]>  getInput(String path) {
 
-
        ArrayList<Integer[]> lines = new ArrayList<>();
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             String line;
             while ((line = br.readLine()) != null) {
-                String[] sLine = new String[4];
+                String[] sLine;
                 Integer[] iLine = new Integer[4];
 
                 sLine = line.strip().split("(,| -> )");
@@ -101,7 +164,6 @@ public class Day05 {
                 lines.add(iLine);
             }
             br.close();
-
 
         } catch (IOException e) {
             e.printStackTrace();
