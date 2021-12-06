@@ -7,3 +7,6 @@ Language: Java
 - [Day 02: Dive!](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day02)
 - [Day 03: Binary Diagnostic](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day03)
 - [Day 04: Giant Squid](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day04)
+- [Day 05: Hydrothermal Venture](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day05)
+- [Day 06: Lanternfish](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day06)
+- 
