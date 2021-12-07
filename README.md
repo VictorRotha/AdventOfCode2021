@@ -9,4 +9,4 @@ Language: Java
 - [Day 04: Giant Squid](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day04)
 - [Day 05: Hydrothermal Venture](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day05)
 - [Day 06: Lanternfish](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day06)
-- 
+- [Day 07: The Treachery of Whales](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day07)
