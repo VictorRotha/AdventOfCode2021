@@ -19,6 +19,12 @@ public class Day07 {
             minPos = (minPos == -1) ? pos : Math.min(minPos, pos);
         }
 
+        System.out.println("Part01: " + getMinFuelPart01(positions, minPos, maxPos));
+        System.out.println("Part02: " + getMinFuelPart02(positions, minPos, maxPos));
+
+    }
+
+    public static int getMinFuelPart01(List<Integer> positions, int minPos, int maxPos) {
         int minFuel = -1;
         int resultPos = -1;
 
@@ -26,8 +32,36 @@ public class Day07 {
 
             int fuel = 0;
             for (int pos : positions) {
-                int f = Math.abs(pos - i);
+                fuel += Math.abs(i - pos);
+            }
+
+            if (fuel < minFuel | minFuel == -1) {
+                resultPos = i;
+                minFuel = fuel;
+            }
+        }
+
+//        System.out.printf("position %s fuel %s\n", resultPos, minFuel);
+
+        return minFuel;
+    }
+
+    public static int getMinFuelPart02(List<Integer> positions, int minPos, int maxPos) {
+        int minFuel = -1;
+        int resultPos = -1;
+
+        for (int i = minPos; i <= maxPos; i++) {
+
+            int fuel = 0;
+            for (int pos : positions) {
+
+                int d = Math.abs(i - pos);
+                int f = 0;
+                for (int j = 0; j < d+1; j++) {
+                    f += j;
+                }
                 fuel += f;
+
             }
 
             if (fuel < minFuel | minFuel == -1) {
@@ -37,7 +71,9 @@ public class Day07 {
 
         }
 
-        System.out.printf("position %s fuel %s\n", resultPos, minFuel);
+//        System.out.printf("position %s fuel %s\n", resultPos, minFuel);
 
+        return minFuel;
     }
+
 }
