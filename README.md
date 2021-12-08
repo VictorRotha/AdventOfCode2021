@@ -10,3 +10,5 @@ Language: Java
 - [Day 05: Hydrothermal Venture](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day05)
 - [Day 06: Lanternfish](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day06)
 - [Day 07: The Treachery of Whales](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day07)
+- [Day 08: Seven Segment Search](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day08)
+- 
