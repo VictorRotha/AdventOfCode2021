@@ -76,10 +76,7 @@ public class Day08 {
             }
         }
 
-        System.out.println(Arrays.toString(digits));
-
         String result = "";
-
         for (String s : display) {
             for (int i = 0; i < 10; i++) {
                 if (equalChars(s, digits[i]))  {
@@ -88,7 +85,6 @@ public class Day08 {
             }
         }
 
-        System.out.println(result);
         return Integer.parseInt(result);
 
     }
