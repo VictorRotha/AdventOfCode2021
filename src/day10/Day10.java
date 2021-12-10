@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,17 +21,26 @@ public class Day10 {
         pairs.put('{', '}');
         pairs.put('<', '>');
 
-        HashMap<Character, Integer> points = new HashMap<>();
-        points.put(')', 3);
-        points.put(']', 57);
-        points.put('}', 1197);
-        points.put('>', 25137);
+        HashMap<Character, Integer> errorPoints = new HashMap<>();
+        errorPoints.put(')', 3);
+        errorPoints.put(']', 57);
+        errorPoints.put('}', 1197);
+        errorPoints.put('>', 25137);
 
         int errorScore = 0;
+
+        HashMap<Character, Integer> autoPoints = new HashMap<>();
+        autoPoints.put('(', 1);
+        autoPoints.put('[', 2);
+        autoPoints.put('{', 3);
+        autoPoints.put('<', 4);
+
+        ArrayList<Long> autoScores = new ArrayList<>();
 
         for (String line : lines) {
 
             ArrayList<Character> openBrackets = new ArrayList<>();
+            boolean corrupt = false;
 
             for (int i = 0; i < line.length(); i++) {
                 char current = line.charAt(i);
@@ -43,16 +53,27 @@ public class Day10 {
                 } else if (current == expected) {
                     openBrackets.remove(openBrackets.size() - 1);
 
-                } else {
-//                    System.out.println("Unexpected Char " + current + " at position " + i + " (expected " + expected + ") in line " + line);
-                    errorScore += points.get(current);
+                } else{
+                    errorScore += errorPoints.get(current);
+                    corrupt = true;
                     break;
                 }
+            }
 
+            if (!corrupt) {
+
+                long autoScore = 0;
+                for (int i = openBrackets.size()-1; i >= 0; i--) {
+                    autoScore = autoScore * 5 + autoPoints.get(openBrackets.get(i));
+                }
+                autoScores.add(autoScore);
             }
         }
 
-        System.out.println("Error Score " + errorScore);
+        System.out.println("Error  Score: " + errorScore);
+
+        Collections.sort(autoScores);
+        System.out.println("Middle Score: " + autoScores.get(autoScores.size() / 2));
 
     }
 
