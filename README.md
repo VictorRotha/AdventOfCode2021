@@ -12,3 +12,4 @@ Language: Java
 - [Day 07: The Treachery of Whales](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day07)
 - [Day 08: Seven Segment Search](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day08)
 - [Day 09: Smoke Basin](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day09)
+- [Day 10: Syntax Scoring](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day10)
