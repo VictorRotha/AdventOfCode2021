@@ -87,10 +87,7 @@ public class Day10 {
             BufferedReader br = new BufferedReader(new FileReader(path));
             String line;
             while((line = br.readLine()) != null) {
-
                 result.add(line.strip());
-
-
             }
             br.close();
         } catch (IOException e) {

@@ -13,3 +13,5 @@ Language: Java
 - [Day 08: Seven Segment Search](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day08)
 - [Day 09: Smoke Basin](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day09)
 - [Day 10: Syntax Scoring](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day10)
+- [Day 11: Dumbo Octopus](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day11)
+
