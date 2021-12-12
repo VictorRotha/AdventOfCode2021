@@ -17,28 +17,32 @@ public class Day12 {
         ArrayList<String> path = new ArrayList<>();
         path.add("start");
 
-        System.out.println("Part 1 possible Paths: " + getPath(path, map));
+        System.out.println("Part 1 possible Paths: " + getPath(path, map, true));
+        System.out.println("Part 2 possible Paths: " + getPath(path, map, false));
 
     }
 
-
-    public static int getPath(ArrayList<String> path, ArrayList<String[]> map) {
+    public static int getPath(ArrayList<String> path, ArrayList<String[]> map, boolean twice) {
 
         String last = path.get(path.size()-1);
 
         int count = 0;
 
+        if (!twice && last.equals(last.toLowerCase()) && path.indexOf(last) != path.size()-1) {
+            twice = true;
+        }
+
         if (Objects.equals(last, "end")) {
             count ++;
 
-        } else {
+        }   else {
 
-            ArrayList<String> neighbours = getValidNeighbours(path, map);
+            ArrayList<String> neighbours = getValidNeighbours(path, map, twice);
 
             for (String n : neighbours) {
                 ArrayList<String> nPath = new ArrayList<>(path);
                 nPath.add(n);
-                count += getPath(nPath, map);
+                count += getPath(nPath, map, twice);
             }
 
         }
@@ -46,8 +50,7 @@ public class Day12 {
         return count;
     }
 
-
-    public static ArrayList<String> getValidNeighbours(ArrayList<String> path, ArrayList<String[]> map) {
+    public static ArrayList<String> getValidNeighbours(ArrayList<String> path, ArrayList<String[]> map, boolean twice) {
 
         String last = path.get(path.size()-1);
 
@@ -60,7 +63,10 @@ public class Day12 {
             }
         }
 
-        neighbours.removeIf(n -> n.equals(n.toLowerCase()) && path.contains(n));
+        neighbours.remove("start");
+        if (twice) {
+            neighbours.removeIf(n -> n.equals(n.toLowerCase()) && path.contains(n));
+        }
 
         return neighbours;
     }

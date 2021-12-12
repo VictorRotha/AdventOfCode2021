@@ -14,4 +14,5 @@ Language: Java
 - [Day 09: Smoke Basin](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day09)
 - [Day 10: Syntax Scoring](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day10)
 - [Day 11: Dumbo Octopus](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day11)
+- [Day 12: Passage Pathing](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day12)
 
