@@ -1,7 +1,7 @@
 # AdventOfCode2021
 [Advent of Code 2021](https://adventofcode.com/2021)
 
-Language: Java
+(Java)
 
 - [Day 01: Sonar Sweep](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day01)
 - [Day 02: Dive!](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day02)
@@ -16,5 +16,5 @@ Language: Java
 - [Day 11: Dumbo Octopus](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day11)
 - [Day 12: Passage Pathing](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day12)
 - [Day 13: Transparent Origami](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day13)
-- 
+- [Day 14: Extended Polymerization](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day14) 
 
