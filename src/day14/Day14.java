@@ -10,58 +10,64 @@ public class Day14 {
 
     public static void main(String[] args) {
 
-        String path = "src/day14/input_sample.txt";
+        String path = "src/day14/input.txt";
 
         Result input = getInput(path);
 
-        HashMap<String, Integer> elements = new HashMap<>();
-
-        ArrayList<String> template = new ArrayList<>();
-        for (char c : input.template) {
-            String element = String.valueOf(c);
-            if (elements.containsKey(element))
-                elements.put(element, elements.get(element) + 1);
-            else
-                elements.put(element, 1);
-            template.add(element);
-        }
-
-        int steps = 10;
-        ArrayList<String> insertion;
-        for (int j = 0; j < steps; j++) {
-
-            insertion = new ArrayList<>();
-
-            for (int i = 0; i < template.size() - 1; i++) {
-                String p = template.get(i) + template.get(i + 1);
-
-                String element = input.pairs.get(p);
-                if (elements.containsKey(element))
-                    elements.put(element, elements.get(element) + 1);
-                else
-                    elements.put(element, 1);
-
-                insertion.add(element);
-            }
-
-            for (int i = insertion.size() - 1; i >= 0; i--) {
-                template.add(i + 1, insertion.get(i));
-            }
-
-        }
-
-        int maxOcc = elements.values().stream().max(Comparator.naturalOrder()).orElse(-1);
-        int minOcc = elements.values().stream().min(Comparator.naturalOrder()).orElse(-1);
-
-        System.out.printf("Result after %s steps: %s - %s = %s\n", steps, maxOcc, minOcc, maxOcc - minOcc);
+        pairInsertion(input, 10);
+        pairInsertion(input, 40);
 
     }
+
+
+    public static void addtoHashMap(HashMap<String, Long> map, String element, long value) {
+
+        if (map.containsKey(element))
+            map.put(element, map.get(element) + value);
+        else
+            map.put(element, value);
+
+    }
+
+    public static void pairInsertion(Result input, int steps) {
+
+        HashMap<String, Long> pairs = new HashMap<>();
+        HashMap<String, String[]> rules = input.rules;
+
+        String firstElement = input.template[0] + "";
+
+        for (int i = 0; i < input.template.length - 1; i++) {
+            String p = String.valueOf(input.template[i]) + input.template[i+1] ;
+            addtoHashMap(pairs, p, 1L);
+        }
+
+        HashMap<String, Long> np;
+        for (int j = 0; j < steps; j++) {
+            np = new HashMap<>();
+            for (String p : pairs.keySet()) {
+                addtoHashMap(np, rules.get(p)[0], pairs.get(p));
+                addtoHashMap(np, rules.get(p)[1], pairs.get(p));
+            }
+            pairs = np;
+        }
+
+        HashMap<String, Long> elements = new HashMap<>();
+        elements.put(firstElement, 1L);
+        for (String p : pairs.keySet()) {
+            addtoHashMap(elements, p.charAt(1) + "", pairs.get(p));
+        }
+        long maxOcc = elements.values().stream().max(Comparator.naturalOrder()).orElse(-1L);
+        long minOcc = elements.values().stream().min(Comparator.naturalOrder()).orElse(-1L);
+
+        System.out.printf("Result after %s steps: %s - %s = %s\n", steps, maxOcc, minOcc, maxOcc - minOcc);
+    }
+
 
 
     public static Result getInput(String path) {
 
         char[] template = null;
-        HashMap<String, String> pairs = new HashMap<>();
+        HashMap<String, String[]> rules = new HashMap<>();
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
@@ -72,7 +78,7 @@ public class Day14 {
 
                 if (row >= 2) {
                     String[] s = line.strip().split(" -> ");
-                    pairs.put(s[0], s[1]);
+                    rules.put(s[0], new String[] {s[0].charAt(0) + s[1], s[1] + s[0].charAt(1)});
                 }
                 row++;
             }
@@ -82,20 +88,19 @@ public class Day14 {
             e.printStackTrace();
         }
 
-        return new Result(template, pairs);
-
+        return new Result(template, rules);
     }
 
 
     public static class Result {
 
         char[] template;
-        HashMap<String, String> pairs;
+        HashMap<String, String[]> rules;
 
-        public Result(char[] template, HashMap<String, String> pairs) {
+        public Result(char[] template, HashMap<String, String[]> rules) {
 
             this.template = template;
-            this.pairs = pairs;
+            this.rules = rules;
 
         }
 
