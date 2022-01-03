@@ -13,12 +13,57 @@ public class Day17 {
         String path = "src/day17/input.txt";
         int[] target = getInput(path);
 
-        System.out.println(Arrays.toString(target));
+        System.out.println("Target: " + Arrays.toString(target) + "\n");
+
+        partOne(target);
+
+        partTwo(target);
+
+    }
+
+    public static void partTwo(int[] target) {
+
+        int minVY = target[2];
+        int maxVY = - target[2] - 1;
+
+        int counter = 0;
+
+        for (int vy = minVY; vy <= maxVY; vy++) {
+            for (int vx = 1; vx <= target[1]; vx++) {
+               if (shoot2(vx, vy, target)) {
+                   counter++;
+               }
+            }
+        }
+
+        System.out.println("Solution Part Two: " + counter);
+
+    }
+
+    public static boolean shoot2(int vx, int vy, int[] target) {
+
+        int x = 0;
+        int y = 0;
+
+        while (true) {
+
+            x += vx;
+            y += vy;
+
+            if (vx > 0) vx -= 1; else if (vx < 0) vx += 1;
+            vy -= 1;
+
+            if (x >= target[0] && x <= target[1] && y >= target[2] && y <= target[3]) return true;
+            if (x > target[1] || y < target[2]) return false;
+        }
+
+    }
+
+
+    public static void partOne(int[] target) {
 
         int vy = - target[2] - 1;
-
-        System.out.println("vy " + vy);
-        System.out.println("max y for this vy " + vy * (vy + 1) / 2);
+        int result =0;
 
         while (true) {
 
@@ -33,12 +78,15 @@ public class Day17 {
                 }
             }
 
-            System.out.println("vx " + vx + " vy " + vy + " ty " + ty  + " tx " + tx);
+            result = vy * (vy + 1) / 2;
+
             if (tx > target[1]) {
                 vy--;
             } else
                 break;
         }
+
+        System.out.println("Solution Part One: " + result);
 
     }
 
@@ -55,7 +103,6 @@ public class Day17 {
 
              if (vx > 0) vx -= 1; else if (vx < 0) vx += 1;
              vy -= 1;
-
 
         }
 
@@ -87,7 +134,6 @@ public class Day17 {
         }
 
         return result;
-
 
     }
 }
