@@ -18,4 +18,5 @@
 - [Day 13: Transparent Origami](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day13)
 - [Day 14: Extended Polymerization](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day14) 
 - [Day 15: Chiton](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day15) 
+- [Day 16: Packet Decoder](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day16) 
 
