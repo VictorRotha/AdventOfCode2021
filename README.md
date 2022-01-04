@@ -20,4 +20,5 @@
 - [Day 15: Chiton](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day15) 
 - Day 16: Packet Decoder
 - [Day 17: Trick Shot](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day17)
+- [Day 18: Snailfish](https://github.com/VictorRotha/AdventOfCode2021/tree/main/src/day18)
 
