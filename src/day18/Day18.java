@@ -14,7 +14,6 @@ public class Day18 {
         String path = "src/day18/input.txt";
 
         List<String> homework = getInput(path);
-        for (String s: homework) System.out.println(s);
 
         String sample = homework.get(0);
         for (int i = 0; i < homework.size()-1; i ++) {
@@ -24,7 +23,28 @@ public class Day18 {
 
         System.out.println("\nnew SnailfishNumber: " + sample);
         System.out.println("Magnitude: " + magnitude(sample));
+        System.out.println("Max Magnitude: " + maxMagnitude(homework));
 
+    }
+
+    public static int maxMagnitude(List<String> homework) {
+
+        int maxMag = 0;
+
+        for (int i = 0; i < homework.size(); i++) {
+
+            for ( int j = 0; j < homework.size(); j++) {
+
+                if (i == j) continue;
+
+                String sample = reduceSnailfish(addSnailfish(homework.get(i), homework.get(j)));
+                maxMag = Math.max(maxMag, Integer.parseInt(magnitude(sample)));
+
+            }
+
+        }
+
+        return maxMag;
     }
 
     public static String reduceSnailfish(String sample) {
@@ -208,21 +228,6 @@ public class Day18 {
         }
 
         return result;
-
-    }
-
-    public static void printList(List<String> list) {
-
-        String result = "( ";
-
-        for (String s : list) {
-            result += s + " | ";
-
-        }
-
-        result = result.substring(0, result.length() - 2) + ")";
-
-        System.out.println(result);
 
     }
 
